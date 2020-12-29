@@ -22,6 +22,7 @@ export class EmployeeComponent implements OnInit {
   filterValue: Array<any> = [];
   orderName: boolean = false;
   reactiveForm: FormGroup;
+  newVariable;
   constructor(private service: DataAccessService, private fb: FormBuilder) {
     this.reactiveForm = this.fb.group({
       name: ['', [ Validators.required ]],
