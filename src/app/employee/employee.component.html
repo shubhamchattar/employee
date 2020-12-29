@@ -1,0 +1,110 @@
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
+  <a href="#" class="navbar-brand"><b>Employee</b></a>
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+</nav>
+
+
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-4">
+            <h2>Employee <b>Details</b></h2><br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <button type="button" class="btn btn-info add-new" (click)="getEmployees()">
+              <i class="fa fa-plus"></i> GET Employees
+            </button>
+
+            <button type="button" class="btn btn-info add-new" (click)="getPDF()">
+              <i class="fa fa-plus"></i> GET PDF
+            </button>
+
+            <a href="#myModal" data-toggle="modal">
+                <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i>Add New</button>
+            </a>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="search-box">
+              <i class="material-icons">&#xE8B6;</i>
+              <input type="text" class="form-control" (keyup)="filterByText($event.target.value)"
+                placeholder="Search&hellip;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover table-bordered">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th (click)="sortByName()">Name <i class="fa fa-sort"></i></th>
+            <th>Department</th>
+            <th>Joining Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of candidate_data;">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.department }}</td>
+            <td>{{ item.joining_date }}</td>
+            <td>
+              <a href="#" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+              <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+              <a (click)="deleteEmployee(item.id)" class="delete" title="Delete" data-toggle="tooltip">
+                <i class="material-icons">&#xE872;</i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-login">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="avatar"><i class="material-icons">&#xE7FD;</i></div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="reactiveForm">
+
+          <div class="form-group">
+            <input type="text" formControlName="name" class="form-control" placeholder="Name">
+          </div>
+
+          <div class="form-group">
+            <input type="email" formControlName="email" class="form-control" placeholder="Email">
+          </div>
+
+          <div class="form-group">
+            <input type="number" formControlName="phone" class="form-control" placeholder="Phone">
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="department" class="form-control" placeholder="Department">
+          </div>
+
+          <div class="form-group">
+            <input type="submit" [disabled]="reactiveForm.invalid" (click)="saveEmployee()" class="btn btn-primary btn-block btn-lg" value="Login">
+          </div>
+
+        </form>
+        <div class="hint-text small"><a href="#">Forgot Your Password?</a></div>
+      </div>
+    </div>
+  </div>
+</div>
