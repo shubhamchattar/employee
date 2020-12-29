@@ -23,6 +23,7 @@ export class EmployeeComponent implements OnInit {
   orderName: boolean = false;
   reactiveForm: FormGroup;
   newVariable;
+  shubhamVariable;
   constructor(private service: DataAccessService, private fb: FormBuilder) {
     this.reactiveForm = this.fb.group({
       name: ['', [ Validators.required ]],
